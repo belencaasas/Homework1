@@ -1,5 +1,7 @@
 #include <iostream>
 using namespace std; 
+#include <memory>
+
 
 //EJERCICIO 1 
 /* a. Crear una función que dado un valor entero “n”, positivo y mayor a uno, devuelva
@@ -90,8 +92,3 @@ int main(){
     }
     return 0;
 }
-
-
-
-
-//EJERCICIO 2 
