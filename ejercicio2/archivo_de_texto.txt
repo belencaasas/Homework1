@@ -1,0 +1,4 @@
+[INFO]rimer prueba
+[ERROR]<ola prueba>
+[WARNING]<hola prueba>
+[WARNING]<pruebaaa 1233 !!%$#7 >
