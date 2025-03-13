@@ -2,21 +2,10 @@
 using namespace std; 
 #include <memory>
 
-/*. 
-
-iv. insert(): inserta un nodo en la posición que se le pase a la función. Si se le pasa
-    una posición mayor al largo de la lista, se debe indicar lo ocurrido y se debe de
-    agregar el nodo al final de la lista.
-v. erase(): borra un nodo en la posición que se le pase a la función. Similar a la
-    función insert(), si la posición es mayor que el largo de la lista, se debe de borrar
-    el último nodo.
-vi. print_list(): imprime la lista completa, separando el valor en cada nodo con “->”.
-    Presentar ejemplos que verifiquen el funcionamiento requerido en las funciones i-vi y,
-    muy importante para el ejercicio, sólo utilizar smart pointers.*/
 
 struct Node{
     int value;
-    unique_ptr<Node> next; //puntero al sig nodo
+    unique_ptr<Node> next; 
 }; 
     
 struct listaenlazada {
@@ -24,23 +13,118 @@ struct listaenlazada {
 };
     
 unique_ptr<Node> crear_nodo(int value){
-    auto new_node = make_unique<Node>(); //make genera los punteros 
+    auto new_node = make_unique<Node>();  
     new_node->value = value; 
     new_node->next = nullptr; 
     return new_node;
 } 
     
-void push_front(int value, listaenlazada& lista){ //& para q no me pase una copia 
+void push_front(int value, listaenlazada& lista){ 
     auto new_node = crear_nodo(value);
     new_node->next = move(lista.head);
     lista.head = move(new_node);
 }
     
 void push_back(int value, listaenlazada& lista){
-    auto new_node = crear_nodo(value); 
-    if (!lista.head) { //si la listabesta vacia la cabeza es el nuevo nodo
+    auto new_node = crear_nodo(value);  
+    if (!lista.head) {  
         lista.head = move(new_node);    
     } 
-    
+    else{
+        Node* current = lista.head.get(); 
+        while (current->next){
+            current = current->next.get();
+        }
+        current->next = move(new_node);
+    }
+} 
+
+void insert(listaenlazada& lista, int posicion, int value){
+    auto new_node = crear_nodo(value);
+
+    if (posicion == 0){
+        new_node->next = move(lista.head);
+        lista.head = move(new_node);
+        return;
+    }
+    Node* current = lista.head.get(); 
+    int contador = 0;  
+
+    while (current && contador < posicion - 1){ 
+        current = current->next.get();
+        contador++; 
+    }
+    if(!current){
+        cout << "La posicion ingresada esta fuera del rango, se insertara al final" << endl;
+        push_back(value,lista);    
+    } else { 
+        new_node->next = move(current->next); 
+        current->next = move(new_node); 
+    }
 }
 
+void erase(listaenlazada& lista , int posicion){
+    if (!lista.head)return; 
+    if (posicion == 0 ){
+        lista.head = move(lista.head->next);  
+        return;
+    }
+    Node* current = lista.head.get(); 
+    int contador = 0; 
+
+    while (current && contador < posicion - 1){
+        current = current->next.get();
+        contador++;
+
+    if(!current->next){
+        cout << "La posicion ingresada esta fuera del rango, se borrara el ultimo nodo" << endl;
+        Node* temporal = lista.head.get();
+        while(temporal->next && temporal->next->next){ 
+            temporal = temporal->next.get();
+        }
+        temporal->next.reset(); 
+    }else{
+        current->next = move(current->next->next);
+    }
+}
+}
+
+void print_list (const listaenlazada& lista){ 
+    Node* current = lista.head.get();
+    while (current){ 
+        cout << current->value;
+        if (current->next){ 
+            cout << "->";
+            
+        }
+        current = current->next.get();
+    }
+    cout << endl; 
+} 
+
+
+int main(){
+    listaenlazada lista; 
+
+    push_front (1,lista);
+    push_front (2,lista);
+
+    print_list(lista);
+
+    push_back(3,lista);
+    push_back(4,lista);
+
+    print_list(lista);
+
+    insert(lista,2,15);
+
+    print_list(lista);
+
+    erase(lista,0);
+
+    print_list(lista);
+
+    return 0 ;
+
+
+}

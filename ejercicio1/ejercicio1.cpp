@@ -3,27 +3,9 @@ using namespace std;
 #include <memory>
 
 
-//EJERCICIO 1 
-/* a. Crear una función que dado un valor entero “n”, positivo y mayor a uno, devuelva
-      una matriz cuadrada con valores como en los siguientes ejemplos para n=2 y n=3:
-      𝑀2 = [1 2
-            3 4] 
-      𝑀3 = [1 2 3
-            4 5 6
-            7 8 9]
-
-   b. Proveer un código que imprima el contenido de la matriz, utilizando un único ciclo
-      for, desde el mayor valor al menor, es decir, para el ejemplo de Para 𝑀2:
-        𝑀2 [1][1] = 4
-        𝑀2 [1][0] = 3
-        𝑀2 [0][1] = 2
-        𝑀2 [0][0] = 1
-    Nota: recuerde que se deben imprimir los índices de la matriz. */
-
-
 //A) 
 
-int** matrizcuadrada(int n){ //los punteros son necesarios para gestionar la memoria que se asigna --> puntero q apunta a una dire de memoria donde se almacenan enteros
+int** matrizcuadrada(int n){ 
     int** matriz = new int*[n];
     for (int i=0 ; i<n ; i++){
         matriz[i] = new int[n];
@@ -41,21 +23,21 @@ int** matrizcuadrada(int n){ //los punteros son necesarios para gestionar la mem
 }
 
 void imprimematriz(int** matriz, int n){
-    cout << "M" << n << "= ["; 
+    // cout << "M" << n << "=" << endl << "["; 
     for (int i=0 ; i < n ; i++){
         for(int j =0; j<n ; j++){
-            cout << matriz[i][j] << " "; //imprime el valor de cada celda
-        }                                //las comillas van para inicializar una cadena q no se tiene un valor especifico
-        cout << endl; //hace un salto de linea dsp de imprimir cada fila
+            cout << matriz[i][j] << " "; 
+        }                                
+        cout << endl; 
     }
-    cout << "]" << endl;
+    // cout << "]" << endl;
 }
 
 void librerarmatriz(int** matriz, int n){
     for (int i=0 ; i<n ; i++){
-        delete[] matriz[i]; //libera cada fila
+        delete[] matriz[i]; 
     }
-    delete[] matriz; //libera el arreglo de filas
+    delete[] matriz; 
 }
 
 //B) 
@@ -75,12 +57,12 @@ void imprimecontenido(int** matriz , int n){
 int main(){
     int n; 
     cout << "Introduce el valor del tamano de la matriz cuadrada: ";
-    cin >> n;  //para la entrada del usuario se usa cin 
+    cin >> n;  
     
     if (n>1){
         int** matriz = matrizcuadrada(n);
         
-        imprimematriz(matriz,n);
+        //imprimematriz(matriz,n);
 
         cout << "\nEl contenido de la matriz: \n";
         imprimecontenido(matriz,n);
