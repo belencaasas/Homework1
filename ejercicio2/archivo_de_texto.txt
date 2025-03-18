@@ -2,3 +2,11 @@
 [ERROR]<ola prueba>
 [WARNING]<hola prueba>
 [WARNING]<pruebaaa 1233 !!%$#7 >
+[WARNING]<hola >
+[UNKNOWN]<hola>
+[ERROR] mal el input
+En el archivo: ejercicio2.cpp
+En la linea: 115
+[ERROR] mal el inputEn el archivo: ejercicio2.cppEn la linea: 116
+[ERROR] mal el inputEn el archivo: ejercicio2.cppEn la linea: 115
+0<what>
