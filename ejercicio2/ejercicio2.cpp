@@ -7,7 +7,7 @@ using namespace std;
 
 //A)
 
-enum class severidad {DEBUG = 1 , INFO , WARNING , ERROR , CRITICAL};
+enum class severidad {DEBUG = 1 , INFO , WARNING , ERROR , CRITICAL, SECURITY};
 
 string nivelseveridad (severidad nivel){
     switch (nivel)
@@ -17,6 +17,7 @@ string nivelseveridad (severidad nivel){
     case severidad::WARNING: return "[WARNING]";
     case severidad::ERROR: return "[ERROR]";
     case severidad::CRITICAL: return "[CRITICAL]";
+    case severidad::SECURITY: return "[SECURITY]";
     default: return "0"; //se chequea antes que no entra
     }
 }
@@ -65,7 +66,7 @@ int main(){
         string msj; 
         getline(cin, msj); 
 
-        cout << " 1-DEBUG \n 2-INFO \n 3-WARNING \n 4-ERROR \n 5-CRITICAL\n";
+        cout << " 1-DEBUG \n 2-INFO \n 3-WARNING \n 4-ERROR \n 5-CRITICAL\n 6-SECURITY\n";
         cout << endl << "Que opcion quiere utilizar: "; //EROR SI NO PASA UN NUMERO DEL 0-5  !!!NO ME SALTA ERROR
         int level;
         cin >> level; 
@@ -88,27 +89,31 @@ int main(){
         string archivo;
         int linea;
 
-        cout<< "ingrese su mensaje de error: ";
-        getline(cin,mensaje_de_error);
+        if(level == 4){
+            cout<< "ingrese su mensaje de error: ";
+            getline(cin,mensaje_de_error);
 
-        cout << "ingrese el archivo donde lo quiere guardar: "; 
-        getline(cin,archivo);
+            cout << "ingrese el archivo donde lo quiere guardar: "; 
+            getline(cin,archivo);
 
-        cout<< "ingrese la lina donde lo quiere guardar: ";  
-        cin >> linea;
+            cout<< "ingrese la lina donde lo quiere guardar: ";  
+            cin >> linea;
 
-        logmessage (mensaje_de_error,archivo,linea); 
+            logmessage (mensaje_de_error,archivo,linea); 
+        }
 
-        string mensaje_de_acceso; 
-        string nombre_de_usuario; 
+        if(level == 6){
+            string mensaje_de_acceso; 
+            string nombre_de_usuario; 
 
-        cout<< "Ingrese el mensaje de acceso: ";
-        getline(cin,mensaje_de_acceso);
+            cout<< "Ingrese el mensaje de acceso: ";
+            getline(cin,mensaje_de_acceso);
+        
+            cout<< "ingrese el nombre del usuario: ";
+            getline(cin,nombre_de_usuario);
 
-        cout<< "ingrese el nombre del usuario: ";
-        getline(cin,nombre_de_usuario);
-
-        logmessage (mensaje_de_acceso,nombre_de_usuario);
+            logmessage (mensaje_de_acceso,nombre_de_usuario);
+        }
     }
     catch(invalid_argument &e){
         cout << e.what() << endl;

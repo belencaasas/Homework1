@@ -11,20 +11,23 @@ struct Node{
 struct listaenlazada {
     unique_ptr<Node> head;
 };
-    
+
+//funcion que crea un nuevo nodo con un valor dado
 unique_ptr<Node> crear_nodo(int value){
     auto new_node = make_unique<Node>();  
     new_node->value = value; 
     new_node->next = nullptr; 
     return new_node;
 } 
-    
+
+//funcion que agrega un nodo al principio de la lista con un valor dado
 void push_front(int value, listaenlazada& lista){ 
     auto new_node = crear_nodo(value);
     new_node->next = move(lista.head);
     lista.head = move(new_node);
 }
-    
+
+//funcion que agrega un nodo al final de la lista con un valor dado 
 void push_back(int value, listaenlazada& lista){
     auto new_node = crear_nodo(value);  
     if (!lista.head) {  
@@ -39,6 +42,7 @@ void push_back(int value, listaenlazada& lista){
     }
 } 
 
+//funcion que inserta un nodo en una posicion especifica con un valor dado
 void insert(listaenlazada& lista, int posicion, int value){
     auto new_node = crear_nodo(value);
 
@@ -63,6 +67,7 @@ void insert(listaenlazada& lista, int posicion, int value){
     }
 }
 
+//funcion que elimina un nodo en una posicion especifica con un valor dado
 void erase(listaenlazada& lista , int posicion){
     if (!lista.head)return; 
     if (posicion == 0 ){
@@ -89,6 +94,7 @@ void erase(listaenlazada& lista , int posicion){
 }
 }
 
+//funcion que imprime todos los elementos de la lista 
 void print_list (const listaenlazada& lista){ 
     Node* current = lista.head.get();
     while (current){ 

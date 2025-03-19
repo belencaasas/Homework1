@@ -5,12 +5,12 @@ using namespace std;
 
 //A) 
 
-int** matrizcuadrada(int n){ 
-    int** matriz = new int*[n];
+int** matrizcuadrada(int n){ // funcion para crear una matriz cuadrada de nxn 
+    int** matriz = new int*[n]; //uso punteros de tipo int para crearla 
     for (int i=0 ; i<n ; i++){
         matriz[i] = new int[n];
     }
-
+    //la matriz inicia con el valor 1 y siguen incrementando de a 1 para la siguiente posicion
     int valorinicial = 1; 
 
     for (int i=0 ; i < n ; i++){
@@ -21,18 +21,18 @@ int** matrizcuadrada(int n){
     return matriz; 
 
 }
-
+//funcion para imprimir el contenido de una matriz cuadrada
 void imprimematriz(int** matriz, int n){
-    // cout << "M" << n << "=" << endl << "["; 
     for (int i=0 ; i < n ; i++){
         for(int j =0; j<n ; j++){
             cout << matriz[i][j] << " "; 
         }                                
         cout << endl; 
     }
-    // cout << "]" << endl;
+    
 }
 
+//funcion que libera la memoria ocupada por la matriz
 void librerarmatriz(int** matriz, int n){
     for (int i=0 ; i<n ; i++){
         delete[] matriz[i]; 
@@ -41,7 +41,7 @@ void librerarmatriz(int** matriz, int n){
 }
 
 //B) 
-void imprimecontenido(int** matriz , int n){
+void imprimecontenido(int** matriz , int n){ //funcion que imprime cada numero de la matriz con su respectivo indice de fila y columna
     int totalelem = n*n;
     for (int i= totalelem-1 ; i >= 0 ; i--){
         int fila = i/n; 
@@ -62,7 +62,7 @@ int main(){
     if (n>1){
         int** matriz = matrizcuadrada(n);
         
-        //imprimematriz(matriz,n);
+        imprimematriz(matriz,n);
 
         cout << "\nEl contenido de la matriz: \n";
         imprimecontenido(matriz,n);
