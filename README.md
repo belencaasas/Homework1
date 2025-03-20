@@ -1,7 +1,8 @@
 Forma de compilar el codigo: 
 
   EJERCICIO 1: 
-    g++ ejercicio1.cpp -Wall -g -o ejercicio1 /n
+    g++ ejercicio1.cpp -Wall -g -o ejercicio1 
+    
     ./ejercicio1 
 
   EJERCICIO 2: 
