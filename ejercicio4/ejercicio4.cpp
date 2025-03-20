@@ -19,7 +19,7 @@ bool comparaCadenas(string& str1 , string& str2, size_t contador =0 ) {  //funci
 
 
 //C) 
-//funcion que solo funciona con cadenas constantes que compara dos cadenas en tiempo de compilacion usando constexpr
+//funcion que recibe como parametro dos cadenas constantes que compara ambas en tiempo de compilacion usando constexpr
 constexpr bool compararCadenasConste(const char* str1, const char* str2, size_t contador =0){ 
     if (str1[contador] == '\0' && str2[contador] == '\0'){
         return true; 
